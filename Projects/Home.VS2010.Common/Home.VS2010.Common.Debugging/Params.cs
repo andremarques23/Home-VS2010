@@ -194,7 +194,7 @@ namespace Home.VS2010.Common.Debugging
         {
             Params.Ignore(parameterName);
 
-            Params.Require(!String.IsNullOrEmpty(parameter), parameterName, delegate { return Strings.StringCannotBeNullOrEmpty; });
+            Params.Require(!string.IsNullOrEmpty(parameter), parameterName, delegate { return Strings.StringCannotBeNullOrEmpty; });
         }
 
         /// <summary>
@@ -343,8 +343,8 @@ namespace Home.VS2010.Common.Debugging
             if (number <= minimum)
             {
                 string message = Strings.MustBeGreaterThan;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
             }
         }
 
@@ -362,8 +362,8 @@ namespace Home.VS2010.Common.Debugging
             if (number <= minimum)
             {
                 string message = Strings.MustBeGreaterThan;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
             }
         }
 
@@ -381,8 +381,8 @@ namespace Home.VS2010.Common.Debugging
             if (number <= minimum)
             {
                 string message = Strings.MustBeGreaterThan;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
             }
         }
 
@@ -400,8 +400,8 @@ namespace Home.VS2010.Common.Debugging
             if (number <= minimum)
             {
                 string message = Strings.MustBeGreaterThan;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
             }
         }
 
@@ -419,8 +419,8 @@ namespace Home.VS2010.Common.Debugging
             if (number <= minimum)
             {
                 string message = Strings.MustBeGreaterThan;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
             }
         }
 
@@ -438,8 +438,8 @@ namespace Home.VS2010.Common.Debugging
             if (number < minimum)
             {
                 string message = Strings.MustBeGreaterThanOrEqualTo;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
             }
         }
 
@@ -457,8 +457,8 @@ namespace Home.VS2010.Common.Debugging
             if (number < minimum)
             {
                 string message = Strings.MustBeGreaterThanOrEqualTo;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
             }
         }
 
@@ -476,8 +476,8 @@ namespace Home.VS2010.Common.Debugging
             if (number < minimum)
             {
                 string message = Strings.MustBeGreaterThanOrEqualTo;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
             }
         }
 
@@ -495,8 +495,8 @@ namespace Home.VS2010.Common.Debugging
             if (number < minimum)
             {
                 string message = Strings.MustBeGreaterThanOrEqualTo;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
             }
         }
 
@@ -514,8 +514,8 @@ namespace Home.VS2010.Common.Debugging
             if (number < minimum)
             {
                 string message = Strings.MustBeGreaterThanOrEqualTo;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, minimum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, minimum));
             }
         }
 
@@ -533,8 +533,8 @@ namespace Home.VS2010.Common.Debugging
             if (number >= maximum)
             {
                 string message = Strings.MustBeLessThan;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
             }
         }
 
@@ -552,8 +552,8 @@ namespace Home.VS2010.Common.Debugging
             if (number >= maximum)
             {
                 string message = Strings.MustBeLessThan;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
             }
         }
 
@@ -571,8 +571,8 @@ namespace Home.VS2010.Common.Debugging
             if (number >= maximum)
             {
                 string message = Strings.MustBeLessThan;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentUICulture, message, maximum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentUICulture, message, maximum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
             }
         }
 
@@ -590,8 +590,8 @@ namespace Home.VS2010.Common.Debugging
             if (number >= maximum)
             {
                 string message = Strings.MustBeLessThan;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
             }
         }
 
@@ -609,8 +609,8 @@ namespace Home.VS2010.Common.Debugging
             if (number >= maximum)
             {
                 string message = Strings.MustBeLessThan;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
             }
         }
 
@@ -628,8 +628,8 @@ namespace Home.VS2010.Common.Debugging
             if (number > maximum)
             {
                 string message = Strings.MustBeLessThanOrEqualTo;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
             }
         }
 
@@ -647,8 +647,8 @@ namespace Home.VS2010.Common.Debugging
             if (number > maximum)
             {
                 string message = Strings.MustBeLessThanOrEqualTo;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
             }
         }
 
@@ -666,8 +666,8 @@ namespace Home.VS2010.Common.Debugging
             if (number > maximum)
             {
                 string message = Strings.MustBeLessThanOrEqualTo;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
             }
         }
 
@@ -685,8 +685,8 @@ namespace Home.VS2010.Common.Debugging
             if (number > maximum)
             {
                 string message = Strings.MustBeLessThanOrEqualTo;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
             }
         }
 
@@ -704,8 +704,8 @@ namespace Home.VS2010.Common.Debugging
             if (number > maximum)
             {
                 string message = Strings.MustBeLessThanOrEqualTo;
-                Debug.Assert(false, parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
-                throw new ArgumentOutOfRangeException(parameterName, String.Format(CultureInfo.CurrentCulture, message, maximum));
+                Debug.Assert(false, parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
+                throw new ArgumentOutOfRangeException(parameterName, string.Format(CultureInfo.CurrentCulture, message, maximum));
             }
         }
 
@@ -723,7 +723,7 @@ namespace Home.VS2010.Common.Debugging
             Params.RequireValidIndex(
                                     number >= minimum && number <= maximum,
                                     parameterName,
-                                    delegate { return String.Format(CultureInfo.CurrentCulture, Strings.MustBeBetween, minimum, maximum); });
+                                    delegate { return string.Format(CultureInfo.CurrentCulture, Strings.MustBeBetween, minimum, maximum); });
         }
 
         /// <summary>
@@ -740,7 +740,7 @@ namespace Home.VS2010.Common.Debugging
             Params.RequireValidIndex(
                                     number >= minimum && number <= maximum,
                                     parameterName,
-                                    delegate { return String.Format(CultureInfo.CurrentCulture, Strings.MustBeBetween, minimum, maximum); });
+                                    delegate { return string.Format(CultureInfo.CurrentCulture, Strings.MustBeBetween, minimum, maximum); });
         }
 
         /// <summary>
@@ -757,7 +757,7 @@ namespace Home.VS2010.Common.Debugging
             Params.RequireValidIndex(
                                     number >= minimum && number <= maximum,
                                     parameterName,
-                                    delegate { return String.Format(CultureInfo.CurrentCulture, Strings.MustBeBetween, minimum, maximum); });
+                                    delegate { return string.Format(CultureInfo.CurrentCulture, Strings.MustBeBetween, minimum, maximum); });
         }
 
         /// <summary>
@@ -774,7 +774,7 @@ namespace Home.VS2010.Common.Debugging
             Params.RequireValidIndex(
                                     number >= minimum && number <= maximum,
                                     parameterName,
-                                    delegate { return String.Format(CultureInfo.CurrentCulture, Strings.MustBeBetween, minimum, maximum); });
+                                    delegate { return string.Format(CultureInfo.CurrentCulture, Strings.MustBeBetween, minimum, maximum); });
         }
 
         /// <summary>
@@ -791,7 +791,7 @@ namespace Home.VS2010.Common.Debugging
             Params.RequireValidIndex(
                                     number >= minimum && number <= maximum,
                                     parameterName,
-                                    delegate { return String.Format(CultureInfo.CurrentCulture, Strings.MustBeBetween, minimum, maximum); });
+                                    delegate { return string.Format(CultureInfo.CurrentCulture, Strings.MustBeBetween, minimum, maximum); });
         }
     }
 }
