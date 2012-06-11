@@ -20,7 +20,7 @@ namespace Home.VS2010.Common.Debugging
     public delegate string ParamErrorTextHandler();
 
     /// <summary>
-    /// Sealed class used to verify method parameters.
+    /// Sealed assert class used to verify method parameters.
     /// </summary>
     public sealed class Params
     {
