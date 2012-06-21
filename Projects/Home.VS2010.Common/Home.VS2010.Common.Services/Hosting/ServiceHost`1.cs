@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ServiceHost{T}.cs" company="Home">
+// <copyright file="ServiceHost.cs" company="Home">
 //     Home development project. No rights reserved.
 // </copyright>
 // <author>André Marques de Araújo</author>
@@ -8,7 +8,9 @@
 namespace Home.VS2010.Common.Services.Hosting
 {
     using System;
+    using System.Linq;
     using System.ServiceModel;
+    using System.ServiceModel.Description;
 
     /// <summary>
     /// Provides a typed host for services.
@@ -25,13 +27,24 @@ namespace Home.VS2010.Common.Services.Hosting
         }
 
         /// <summary>
-        /// Initializes a new instance of the System.ServiceModel.ServiceHost class with 
+        /// Initializes a new instance of the ServiceHost class with 
         /// the type of service and its base addresses specified.
         /// </summary>
         /// <param name="baseAddresses">An array of type System.Uri that contains the base addresses for the hosted service.</param>
         public ServiceHost(params Uri[] baseAddresses)
             : base(typeof(T), baseAddresses)
         {
+        }
+
+        /// <summary>
+        /// TODO: Update summary.
+        /// </summary>
+        public bool HasMetadaExchangeEndpoint
+        {
+            get
+            {
+                return this.Description.Endpoints.Any(endpoint => endpoint.Contract.ContractType == typeof(IMetadataExchange));
+            }
         }
     }
 }
