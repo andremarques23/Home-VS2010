@@ -59,5 +59,14 @@ namespace Home.VS2010.Common.Services.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The host is already opened..
+        /// </summary>
+        internal static string HostAlreadyOpened {
+            get {
+                return ResourceManager.GetString("HostAlreadyOpened", resourceCulture);
+            }
+        }
     }
 }
