@@ -30,7 +30,7 @@ namespace Home.VS2010.Common.Services.Hosting
         /// <summary>
         /// TODO: Update summary.
         /// </summary>
-        private static Dictionary<Type, Tuple<ServiceHost, EndpointAddress>> serviceHosts = new Dictionary<Type, Tuple<ServiceHost, EndpointAddress>>();
+        private static Dictionary<Type, KeyValuePair<ServiceHost, EndpointAddress>> serviceHosts = new Dictionary<Type, KeyValuePair<ServiceHost, EndpointAddress>>();
 
         /// <summary>
         /// Initializes static members of the <see cref="InProcServiceFactory" /> class.
@@ -41,9 +41,9 @@ namespace Home.VS2010.Common.Services.Hosting
 
             AppDomain.CurrentDomain.ProcessExit += delegate
                                                    {
-                                                       foreach (Tuple<ServiceHost, EndpointAddress> item in serviceHosts.Values)
+                                                       foreach (KeyValuePair<ServiceHost, EndpointAddress> item in serviceHosts.Values)
                                                        {
-                                                           item.Item1.Close();
+                                                           item.Key.Close();
                                                        }
                                                    };
         }
@@ -58,9 +58,9 @@ namespace Home.VS2010.Common.Services.Hosting
             where I : class
             where S : class, I
         {
-            EndpointAddress endpointAddress = GetAddress<I, S>();
+            KeyValuePair<ServiceHost, EndpointAddress> hostAddressPair = GetHostAddressPair<I, S>();
 
-            return ChannelFactory<I>.CreateChannel(Binding, endpointAddress);
+            return ChannelFactory<I>.CreateChannel(Binding, hostAddressPair.Value);
         }
 
         /// <summary>
@@ -71,8 +71,7 @@ namespace Home.VS2010.Common.Services.Hosting
         public static void CloseChannel<I>(I channel)
             where I : class
         {
-            ICommunicationObject channelProxy = channel as ICommunicationObject;
-            channelProxy.Close();
+            (channel as ICommunicationObject).Close();
         }
 
         /// <summary>
@@ -80,12 +79,31 @@ namespace Home.VS2010.Common.Services.Hosting
         /// </summary>
         /// <typeparam name="I">The type of the service contract.</typeparam>
         /// <typeparam name="S">The type of the implemented service contract.</typeparam>
-        /// <returns>The endpoint address for the given implemented service and contract types.</returns>
-        private static EndpointAddress GetAddress<I, S>()
+        /// <returns>A service host/ endpoint address pair.</returns>
+        private static KeyValuePair<ServiceHost, EndpointAddress> GetHostAddressPair<I, S>()
             where I : class
             where S : class, I
         {
-            return new EndpointAddress(string.Empty);
+            KeyValuePair<ServiceHost, EndpointAddress> hostAddressPair;
+            Type serviceType = typeof(S);
+
+            if (serviceHosts.ContainsKey(serviceType))
+            {
+                hostAddressPair = serviceHosts[serviceType];
+            }
+            else
+            {
+                ServiceHost<S> serviceHost = new ServiceHost<S>(new Uri(BaseAddress));
+                EndpointAddress endpointAddress = new EndpointAddress(BaseAddress + serviceType.Name);
+
+                hostAddressPair = new KeyValuePair<ServiceHost, EndpointAddress>(serviceHost, endpointAddress);
+                serviceHosts.Add(serviceType, hostAddressPair);
+
+                serviceHost.AddServiceEndpoint(typeof(I), Binding, endpointAddress.Uri);
+                serviceHost.Open();
+            }
+
+            return hostAddressPair;
         }
     }
 }

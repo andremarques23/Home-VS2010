@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ServiceHost.cs" company="Home">
+// <copyright file="ServiceHost`1.cs" company="Home">
 //     Home development project. No rights reserved.
 // </copyright>
 // <author>André Marques de Araújo</author>
