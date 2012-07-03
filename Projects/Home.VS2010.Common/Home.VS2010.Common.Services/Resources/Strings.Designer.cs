@@ -68,5 +68,14 @@ namespace Home.VS2010.Common.Services.Resources {
                 return ResourceManager.GetString("HostAlreadyOpened", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to net.pipe://localhost/.
+        /// </summary>
+        internal static string InProcServiceBaseAddress {
+            get {
+                return ResourceManager.GetString("InProcServiceBaseAddress", resourceCulture);
+            }
+        }
     }
 }

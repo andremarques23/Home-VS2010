@@ -120,4 +120,7 @@
   <data name="HostAlreadyOpened" xml:space="preserve">
     <value>The host is already opened.</value>
   </data>
+  <data name="InProcServiceBaseAddress" xml:space="preserve">
+    <value>net.pipe://localhost/</value>
+  </data>
 </root>

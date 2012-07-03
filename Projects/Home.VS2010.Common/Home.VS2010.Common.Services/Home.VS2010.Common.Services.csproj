@@ -40,6 +40,8 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Hosting\InProcServiceFactory.cs" />
+    <Compile Include="Hosting\ProxyWrapper.cs" />
     <Compile Include="Hosting\ServiceHost`1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Strings.Designer.cs">
