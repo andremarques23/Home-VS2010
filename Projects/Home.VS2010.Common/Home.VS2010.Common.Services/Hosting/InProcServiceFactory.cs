@@ -1,8 +1,9 @@
-﻿// -----------------------------------------------------------------------
+﻿//-----------------------------------------------------------------------
 // <copyright file="InProcServiceFactory.cs" company="Home">
-// TODO: Update copyright text.
+//     Home development project. No rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
+// <author>André Marques de Araújo</author>
+//-----------------------------------------------------------------------
 
 namespace Home.VS2010.Common.Services.Hosting
 {
@@ -75,7 +76,20 @@ namespace Home.VS2010.Common.Services.Hosting
         }
 
         /// <summary>
-        /// Gets a service host / endpoint address pair of a specified service contract type.
+        /// Closes a channel of a specified service contract type.
+        /// </summary>
+        /// <typeparam name="I">>The type of the service contract.</typeparam>
+        /// <param name="channel">The channel to be closed by the factory.</param>
+        /// <param name="timeout">The System.Timespan that specifies how long the send operation has to complete before timing out.</param>
+        public static void CloseChannel<I>(I channel, TimeSpan timeout)
+            where I : class
+        {
+            (channel as ICommunicationObject).Close(timeout);
+        }
+
+        /// <summary>
+        /// Gets a service host/endpoint address pair of a specified service contract type. If the collection of types
+        /// and pairs does not already contain the service type, a service host instance is created for the type.
         /// </summary>
         /// <typeparam name="I">The type of the service contract.</typeparam>
         /// <typeparam name="S">The type of the implemented service contract.</typeparam>

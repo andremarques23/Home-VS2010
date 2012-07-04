@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ServiceHost`1.cs" company="Home">
+// <copyright file="ServiceHost.cs" company="Home">
 //     Home development project. No rights reserved.
 // </copyright>
 // <author>André Marques de Araújo</author>
@@ -39,7 +39,7 @@ namespace Home.VS2010.Common.Services.Hosting
         }
 
         /// <summary>
-        /// TODO: Update summary.
+        /// Gets a value indicating whether any endpoint from the service description implements the IMetadataExchange service contract.
         /// </summary>
         public bool HasMetadaExchangeEndpoint
         {
@@ -50,7 +50,7 @@ namespace Home.VS2010.Common.Services.Hosting
         }
 
         /// <summary>
-        /// Gets or sets a value that specifies that general unhandled execution exceptions are to be converted into and sent as a fault message.
+        /// Gets or sets a value indicating whether general unhandled execution exceptions are to be converted into and sent as a fault message.
         /// Set this to true only during development to troubleshoot a service.     
         /// </summary>
         public bool IncludeExceptionDetailInFaults
