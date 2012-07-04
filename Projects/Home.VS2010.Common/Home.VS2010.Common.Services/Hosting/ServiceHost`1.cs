@@ -15,7 +15,7 @@ namespace Home.VS2010.Common.Services.Hosting
     using Resources;
 
     /// <summary>
-    /// Provides a typed host for services.
+    /// Provides type safety hosting for services.
     /// </summary>
     /// <typeparam name="T">The type of hosted service.</typeparam>
     public class ServiceHost<T> : ServiceHost

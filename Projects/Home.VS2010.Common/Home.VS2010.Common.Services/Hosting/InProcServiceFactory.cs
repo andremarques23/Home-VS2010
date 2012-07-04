@@ -14,7 +14,7 @@ namespace Home.VS2010.Common.Services.Hosting
     using Resources;
 
     /// <summary>
-    /// A factory that creates channels of different types that are used by clients designed to streamline and automate in-proc hosting.
+    /// A factory that creates channels of different types that are used by clients designed to streamline and automate in-process hosting.
     /// </summary>
     public static class InProcServiceFactory
     {

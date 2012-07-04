@@ -11,7 +11,7 @@ namespace Home.VS2010.Common.Services.Hosting
     using System.ServiceModel;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Wraps the InProcServiceFactory class to provide regular .NET plain syntax programming model for creating and managing services.
     /// </summary>
     /// <typeparam name="I">The type of the service contract.</typeparam>
     /// <typeparam name="S">The type of the implemented service contract.</typeparam>
