@@ -13,27 +13,27 @@ namespace Home.VS2010.Common.Services.Hosting
     using Resources;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// A factory that creates channels of different types that are used by clients designed to streamline and automate in-proc hosting.
     /// </summary>
     public static class InProcServiceFactory
     {
         /// <summary>
-        /// TODO: Update summary.
+        /// Base address used by the hosted services.
         /// </summary>
         private static readonly string BaseAddress = Strings.InProcServiceBaseAddress + Guid.NewGuid();
 
         /// <summary>
-        /// TODO: Update summary.
+        /// Binding element that specify the protocols, transports, and message encoders used by the hosted services.
         /// </summary>
         private static readonly Binding Binding;
 
         /// <summary>
-        /// TODO: Update summary.
+        /// A collection of types and service host/endpoint address pair values.
         /// </summary>
-        private static Dictionary<Type, KeyValuePair<ServiceHost, EndpointAddress>> serviceHosts = new Dictionary<Type, KeyValuePair<ServiceHost, EndpointAddress>>();
+        private static Dictionary<Type, HostEndpointPair> serviceHosts = new Dictionary<Type, HostEndpointPair>();
 
         /// <summary>
-        /// Initializes static members of the <see cref="InProcServiceFactory" /> class.
+        /// Initializes static members of the InProcServiceFactory class.
         /// </summary>
         static InProcServiceFactory()
         {
@@ -41,33 +41,33 @@ namespace Home.VS2010.Common.Services.Hosting
 
             AppDomain.CurrentDomain.ProcessExit += delegate
                                                    {
-                                                       foreach (KeyValuePair<ServiceHost, EndpointAddress> item in serviceHosts.Values)
+                                                       foreach (HostEndpointPair hostEndpointPair in serviceHosts.Values)
                                                        {
-                                                           item.Key.Close();
+                                                           hostEndpointPair.ServiceHost.Close();
                                                        }
                                                    };
         }
 
         /// <summary>
-        /// TODO: Update summary.
+        /// Creates a channel of a specified service contract type.
         /// </summary>
         /// <typeparam name="I">The type of the service contract.</typeparam>
         /// <typeparam name="S">The type of the implemented service contract.</typeparam>
-        /// <returns>The channel of type <see cref="I" /> created by the factory.</returns>
+        /// <returns>The channel created by the factory.</returns>
         public static I CreateChannel<I, S>()
             where I : class
             where S : class, I
         {
-            KeyValuePair<ServiceHost, EndpointAddress> hostAddressPair = GetHostAddressPair<I, S>();
+            HostEndpointPair hostAddressPair = GetHostEndpointPair<I, S>();
 
-            return ChannelFactory<I>.CreateChannel(Binding, hostAddressPair.Value);
+            return ChannelFactory<I>.CreateChannel(Binding, hostAddressPair.EndpointAddress);
         }
 
         /// <summary>
-        /// TODO: Update summary.
+        /// Closes a channel of a specified service contract type.
         /// </summary>
         /// <typeparam name="I">>The type of the service contract.</typeparam>
-        /// <param name="channel">The channel of type <see cref="I" /> to be closed by the factory.</param>
+        /// <param name="channel">The channel to be closed by the factory.</param>
         public static void CloseChannel<I>(I channel)
             where I : class
         {
@@ -75,16 +75,16 @@ namespace Home.VS2010.Common.Services.Hosting
         }
 
         /// <summary>
-        /// TODO: Update summary.
+        /// Gets a service host / endpoint address pair of a specified service contract type.
         /// </summary>
         /// <typeparam name="I">The type of the service contract.</typeparam>
         /// <typeparam name="S">The type of the implemented service contract.</typeparam>
-        /// <returns>A service host/ endpoint address pair.</returns>
-        private static KeyValuePair<ServiceHost, EndpointAddress> GetHostAddressPair<I, S>()
+        /// <returns>A service host/endpoint address pair.</returns>
+        private static HostEndpointPair GetHostEndpointPair<I, S>()
             where I : class
             where S : class, I
         {
-            KeyValuePair<ServiceHost, EndpointAddress> hostAddressPair;
+            HostEndpointPair hostAddressPair;
             Type serviceType = typeof(S);
 
             if (serviceHosts.ContainsKey(serviceType))
@@ -96,7 +96,7 @@ namespace Home.VS2010.Common.Services.Hosting
                 ServiceHost<S> serviceHost = new ServiceHost<S>(new Uri(BaseAddress));
                 EndpointAddress endpointAddress = new EndpointAddress(BaseAddress + serviceType.Name);
 
-                hostAddressPair = new KeyValuePair<ServiceHost, EndpointAddress>(serviceHost, endpointAddress);
+                hostAddressPair = new HostEndpointPair(serviceHost, endpointAddress);
                 serviceHosts.Add(serviceType, hostAddressPair);
 
                 serviceHost.AddServiceEndpoint(typeof(I), Binding, endpointAddress.Uri);
@@ -104,6 +104,33 @@ namespace Home.VS2010.Common.Services.Hosting
             }
 
             return hostAddressPair;
+        }
+
+        /// <summary>
+        /// Defines a ServiceHost/EndpointAddress pair.
+        /// </summary>
+        private struct HostEndpointPair
+        {
+            /// <summary>
+            /// The service host associated with the endpoint address.
+            /// </summary>
+            public readonly ServiceHost ServiceHost;
+
+            /// <summary>
+            /// The endpoint address associated with the service host.
+            /// </summary>
+            public readonly EndpointAddress EndpointAddress;
+
+            /// <summary>
+            /// Initializes a new instance of the HostEndpointPair struct.
+            /// </summary>
+            /// <param name="serviceHost">The service host associated with the endpoint address.</param>
+            /// <param name="endpointAddress">The endpoint address associated with the service host.</param>
+            public HostEndpointPair(ServiceHost serviceHost, EndpointAddress endpointAddress)
+            {
+                this.ServiceHost = serviceHost;
+                this.EndpointAddress = endpointAddress;
+            }
         }
     }
 }
