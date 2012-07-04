@@ -94,7 +94,7 @@ namespace Home.VS2010.Common.Services.Hosting
             else
             {
                 ServiceHost<S> serviceHost = new ServiceHost<S>(new Uri(BaseAddress));
-                EndpointAddress endpointAddress = new EndpointAddress(BaseAddress + serviceType.Name);
+                EndpointAddress endpointAddress = new EndpointAddress(BaseAddress + Guid.NewGuid());
 
                 hostAddressPair = new HostEndpointPair(serviceHost, endpointAddress);
                 serviceHosts.Add(serviceType, hostAddressPair);
