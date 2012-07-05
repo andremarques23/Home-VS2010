@@ -30,32 +30,87 @@ namespace Home.VS2010.Common.Services.Hosting
         /// <summary>
         /// Occurs when the communication object completes its transition from the closing state into the closed state.
         /// </summary>
-        public event EventHandler Closed;
+        event EventHandler ICommunicationObject.Closed
+        {
+            add
+            {
+                (this.Proxy as ICommunicationObject).Closed += value;
+            }
+
+            remove
+            {
+                (this.Proxy as ICommunicationObject).Closed -= value;
+            }
+        }
 
         /// <summary>
         /// Occurs when the communication object first enters the closing state.
         /// </summary>
-        public event EventHandler Closing;
+        event EventHandler ICommunicationObject.Closing
+        {
+            add 
+            {
+                (this.Proxy as ICommunicationObject).Closing += value;
+            }
+
+            remove 
+            {
+                (this.Proxy as ICommunicationObject).Closing -= value;
+            }
+        }
 
         /// <summary>
         /// Occurs when the communication object first enters the faulted state.
         /// </summary>
-        public event EventHandler Faulted;
+        event EventHandler ICommunicationObject.Faulted
+        {
+            add
+            {
+                (this.Proxy as ICommunicationObject).Faulted += value;
+            }
+
+            remove
+            {
+                (this.Proxy as ICommunicationObject).Faulted -= value;
+            }
+        }
 
         /// <summary>
         /// Occurs when the communication object completes its transition from the opening state into the opened state.
         /// </summary>
-        public event EventHandler Opened;
+        event EventHandler ICommunicationObject.Opened
+        {
+            add
+            {
+                (this.Proxy as ICommunicationObject).Opened += value;
+            }
+
+            remove
+            {
+                (this.Proxy as ICommunicationObject).Opened -= value;
+            }
+        }
 
         /// <summary>
         /// Occurs when the communication object first enters the opening state.
         /// </summary>
-        public event EventHandler Opening;
+        event EventHandler ICommunicationObject.Opening
+        {
+            add
+            {
+                (this.Proxy as ICommunicationObject).Opening += value;
+            }
+
+            remove
+            {
+                (this.Proxy as ICommunicationObject).Opening -= value;
+            }
+        }
 
         /// <summary>
         /// Gets the current state of the communication-oriented object.
         /// </summary>
-        public CommunicationState State
+        CommunicationState ICommunicationObject.State
         {
             get 
             {
@@ -83,7 +138,7 @@ namespace Home.VS2010.Common.Services.Hosting
         /// <summary>
         /// Causes a communication object to transition immediately from its current state into the closed state.
         /// </summary>
-        public void Abort()
+        void ICommunicationObject.Abort()
         {
             (this.Proxy as ICommunicationObject).Abort();
         }
@@ -95,7 +150,7 @@ namespace Home.VS2010.Common.Services.Hosting
         /// <param name="callback">The System.AsyncCallback delegate that receives notification of the completion of the asynchronous close operation.</param>
         /// <param name="state">An object, specified by the application, that contains state information associated with the asynchronous close operation.</param>
         /// <returns>The System.IAsyncResult that references the asynchronous close operation.</returns>
-        public IAsyncResult BeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult ICommunicationObject.BeginClose(TimeSpan timeout, AsyncCallback callback, object state)
         {
             return (this.Proxy as ICommunicationObject).BeginClose(timeout, callback, state);
         }
@@ -106,7 +161,7 @@ namespace Home.VS2010.Common.Services.Hosting
         /// <param name="callback">The System.AsyncCallback delegate that receives notification of the completion of the asynchronous close operation.</param>
         /// <param name="state">An object, specified by the application, that contains state information associated with the asynchronous close operation.</param>
         /// <returns>The System.IAsyncResult that references the asynchronous close operation.</returns>
-        public IAsyncResult BeginClose(AsyncCallback callback, object state)
+        IAsyncResult ICommunicationObject.BeginClose(AsyncCallback callback, object state)
         {
             return (this.Proxy as ICommunicationObject).BeginClose(callback, state);
         }
@@ -118,7 +173,7 @@ namespace Home.VS2010.Common.Services.Hosting
         /// <param name="callback">The System.AsyncCallback delegate that receives notification of the completion of the asynchronous open operation.</param>
         /// <param name="state">An object, specified by the application, that contains state information associated with the asynchronous open operation.</param>
         /// <returns>The System.IAsyncResult that references the asynchronous open operation.</returns>
-        public IAsyncResult BeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult ICommunicationObject.BeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
         {
             return (this.Proxy as ICommunicationObject).BeginOpen(timeout, callback, state);
         }
@@ -129,7 +184,7 @@ namespace Home.VS2010.Common.Services.Hosting
         /// <param name="callback">The System.AsyncCallback delegate that receives notification of the completion of the asynchronous open operation.</param>
         /// <param name="state">An object, specified by the application, that contains state information associated with the asynchronous open operation.</param>
         /// <returns>The System.IAsyncResult that references the asynchronous open operation.</returns>
-        public IAsyncResult BeginOpen(AsyncCallback callback, object state)
+        IAsyncResult ICommunicationObject.BeginOpen(AsyncCallback callback, object state)
         {
             return (this.Proxy as ICommunicationObject).BeginOpen(callback, state);
         }
@@ -146,7 +201,7 @@ namespace Home.VS2010.Common.Services.Hosting
         /// Causes a communication object to transition from its current state into the closed state.
         /// </summary>
         /// <param name="timeout">The System.Timespan that specifies how long the send operation has to complete before timing out.</param>
-        public void Close(TimeSpan timeout)
+        void ICommunicationObject.Close(TimeSpan timeout)
         {
             InProcServiceFactory.CloseChannel<I>(this.Proxy, timeout);
         }
@@ -163,35 +218,35 @@ namespace Home.VS2010.Common.Services.Hosting
         /// Completes an asynchronous operation to close a communication object.
         /// </summary>
         /// <param name="result">The System.IAsyncResult that is returned by a call to the System.ServiceModel.ICommunicationObject.BeginClose() method.</param>
-        public void EndClose(IAsyncResult result)
+        void ICommunicationObject.EndClose(IAsyncResult result)
         {
-            throw new NotImplementedException();
+            (this.Proxy as ICommunicationObject).EndClose(result);
         }
 
         /// <summary>
         /// Completes an asynchronous operation to open a communication object.
         /// </summary>
         /// <param name="result">The System.IAsyncResult that is returned by a call to the System.ServiceModel.ICommunicationObject.BeginOpen() method.</param>
-        public void EndOpen(IAsyncResult result)
+        void ICommunicationObject.EndOpen(IAsyncResult result)
         {
-            throw new NotImplementedException();
+            (this.Proxy as ICommunicationObject).EndOpen(result);
         }
 
         /// <summary>
         /// Causes a communication object to transition from the created state into the opened state within a specified interval of time.
         /// </summary>
         /// <param name="timeout">The System.ServiceModel.ICommunicationObject was unable to be opened and has entered the System.ServiceModel.CommunicationState.Faulted state.</param>
-        public void Open(TimeSpan timeout)
+        void ICommunicationObject.Open(TimeSpan timeout)
         {
-            throw new NotImplementedException();
+            (this.Proxy as ICommunicationObject).Open(timeout);
         }
 
         /// <summary>
         /// Causes a communication object to transition from the created state into the opened state.
         /// </summary>
-        public void Open()
+        void ICommunicationObject.Open()
         {
-            throw new NotImplementedException();
+            (this.Proxy as ICommunicationObject).Open();
         }
     }
 }
