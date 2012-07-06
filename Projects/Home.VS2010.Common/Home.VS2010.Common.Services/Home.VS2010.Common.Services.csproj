@@ -40,6 +40,8 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Duplex\DuplexClientBase`2.cs" />
+    <Compile Include="Duplex\InstanceContext`1.cs" />
     <Compile Include="Hosting\InProcServiceFactory.cs" />
     <Compile Include="Hosting\CommunicationWrapper`2.cs" />
     <Compile Include="Hosting\ServiceHost`1.cs" />
