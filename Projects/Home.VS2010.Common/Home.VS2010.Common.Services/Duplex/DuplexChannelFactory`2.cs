@@ -96,7 +96,7 @@ namespace Home.VS2010.Common.Services.Duplex
         /// Initializes a new instance of the DuplexChannelFactory class.
         /// </summary>
         /// <param name="callbackObject">The System.Object that the client uses to listen for messages from the connected service.</param>
-        public DuplexChannelFactory(object callbackObject)
+        public DuplexChannelFactory(C callbackObject)
             : base(callbackObject)
         {
         }
@@ -106,7 +106,7 @@ namespace Home.VS2010.Common.Services.Duplex
         /// </summary>
         /// <param name="callbackObject">The System.Object that the client uses to listen for messages from the connected service.</param>
         /// <param name="serviceEndpoint">The System.ServiceModel.Description.ServiceEndpoint to which channels produced by the factory connect.</param>
-        public DuplexChannelFactory(object callbackObject, ServiceEndpoint serviceEndpoint)
+        public DuplexChannelFactory(C callbackObject, ServiceEndpoint serviceEndpoint)
             : base(callbackObject, serviceEndpoint)
         {
         }
@@ -116,7 +116,7 @@ namespace Home.VS2010.Common.Services.Duplex
         /// </summary>
         /// <param name="callbackObject">The System.Object that the client uses to listen for messages from the connected service.</param>
         /// <param name="endpointConfigurationName">The name used for the endpoint configuration.</param>
-        public DuplexChannelFactory(object callbackObject, string endpointConfigurationName)
+        public DuplexChannelFactory(C callbackObject, string endpointConfigurationName)
             : base(callbackObject, endpointConfigurationName)
         {
         }
@@ -127,7 +127,7 @@ namespace Home.VS2010.Common.Services.Duplex
         /// <param name="callbackObject">The System.Object that the client uses to listen for messages from the connected service.</param>
         /// <param name="endpointConfigurationName">The name used for the endpoint configuration.</param>
         /// <param name="endpointRemoteAddress">>The System.ServiceModel.EndpointAddress that provides the location of the service.</param>
-        public DuplexChannelFactory(object callbackObject, string endpointConfigurationName, EndpointAddress endpointRemoteAddress)
+        public DuplexChannelFactory(C callbackObject, string endpointConfigurationName, EndpointAddress endpointRemoteAddress)
             : base(callbackObject, endpointConfigurationName, endpointRemoteAddress)
         {
         }
@@ -137,7 +137,7 @@ namespace Home.VS2010.Common.Services.Duplex
         /// </summary>
         /// <param name="callbackObject">The System.Object that the client uses to listen for messages from the connected service.</param>
         /// <param name="binding">The System.ServiceModel.Channels.Binding used to connect to the service by channels produced by the factory.</param>
-        public DuplexChannelFactory(object callbackObject, Binding binding)
+        public DuplexChannelFactory(C callbackObject, Binding binding)
             : base(callbackObject, binding)
         {
         }
@@ -148,7 +148,7 @@ namespace Home.VS2010.Common.Services.Duplex
         /// <param name="callbackObject">The System.Object that the client uses to listen for messages from the connected service.</param>
         /// <param name="binding">The System.ServiceModel.Channels.Binding used to connect to the service by channels produced by the factory.</param>
         /// <param name="endpointRemoteAddress">The System.ServiceModel.EndpointAddress that provides the location of the service.</param>
-        public DuplexChannelFactory(object callbackObject, Binding binding, EndpointAddress endpointRemoteAddress)
+        public DuplexChannelFactory(C callbackObject, Binding binding, EndpointAddress endpointRemoteAddress)
             : base(callbackObject, binding, endpointRemoteAddress)
         {
         }
@@ -159,7 +159,7 @@ namespace Home.VS2010.Common.Services.Duplex
         /// <param name="callbackObject">The System.Object that the client uses to listen for messages from the connected service.</param>
         /// <param name="binding">The System.ServiceModel.Channels.Binding used to connect to the service by channels produced by the factory.</param>
         /// <param name="remoteAddress">The remote address that provides the location of the service.</param>
-        public DuplexChannelFactory(object callbackObject, Binding binding, string remoteAddress)
+        public DuplexChannelFactory(C callbackObject, Binding binding, string remoteAddress)
             : base(callbackObject, binding, remoteAddress)
         {
         }
@@ -234,6 +234,78 @@ namespace Home.VS2010.Common.Services.Duplex
         public DuplexChannelFactory(Type callbackInstanceType, Binding binding, string remoteAddress)
             : base(callbackInstanceType, binding, remoteAddress)
         {
+        }
+
+        /// <summary>
+        /// Creates a duplex channel between a service and a callback instance on the client.
+        /// </summary>
+        /// <param name="instanceContext">The System.ServiceModel.InstanceContext that the client uses to listen for messages from the connected service.</param>
+        /// <param name="endpointConfigurationName">The name used for the endpoint configuration.</param>
+        /// <returns>A channel of type T, the generic parameter for the factory, between the client and service.</returns>
+        public static T CreateChannel(InstanceContext<C> instanceContext, string endpointConfigurationName)
+        {
+            return DuplexChannelFactory<T>.CreateChannel(instanceContext.Context, endpointConfigurationName);
+        }
+
+        /// <summary>
+        /// Creates a duplex channel between a service and a callback instance on the client.
+        /// </summary>
+        /// <param name="instanceContext">The System.ServiceModel.InstanceContext that the client uses to listen for messages from the connected service.</param>
+        /// <param name="binding">The System.ServiceModel.Channels.Binding used to connect to the service by channels produced by the factory.</param>
+        /// <param name="endpointAddress">The System.ServiceModel.EndpointAddress that provides the location of the service.</param>
+        /// <returns>A channel of type T, the generic parameter for the factory, between the client and service.</returns>
+        public static T CreateChannel(InstanceContext<C> instanceContext, Binding binding, EndpointAddress endpointAddress)
+        {
+            return DuplexChannelFactory<T>.CreateChannel(instanceContext.Context, binding, endpointAddress);
+        }
+
+        /// <summary>
+        /// Creates a duplex channel between a service and a callback instance on the client.
+        /// </summary>
+        /// <param name="instanceContext">The System.ServiceModel.InstanceContext that the client uses to listen for messages from the connected service.</param>
+        /// <param name="binding">The System.ServiceModel.Channels.Binding used to connect to the service by channels produced by the factory.</param>
+        /// <param name="endpointAddress">The System.ServiceModel.EndpointAddress that provides the location of the service.</param>
+        /// <param name="via">The System.Uri that contains the transport address to which the message is sent.</param>
+        /// <returns>A channel of type T, the generic parameter for the factory, between the client and service.</returns>
+        public static T CreateChannel(InstanceContext<C> instanceContext, Binding binding, EndpointAddress endpointAddress, Uri via)
+        {
+            return DuplexChannelFactory<T>.CreateChannel(instanceContext.Context, binding, endpointAddress, via);
+        }
+
+        /// <summary>
+        /// Creates a duplex channel between a service and a callback instance on the client.
+        /// </summary>
+        /// <param name="callbackObject">The System.Object that the client uses to listen for messages from the connected service.</param>
+        /// <param name="endpointConfigurationName">The name used for the endpoint configuration.</param>
+        /// <returns>A channel of type T, the generic parameter for the factory, between the client and service.</returns>
+        public static T CreateChannel(C callbackObject, string endpointConfigurationName)
+        {
+            return DuplexChannelFactory<T>.CreateChannel(callbackObject, endpointConfigurationName);
+        }
+
+        /// <summary>
+        /// Creates a duplex channel between a service and a callback instance on the client.
+        /// </summary>
+        /// <param name="callbackObject">The System.Object that the client uses to listen for messages from the connected service.</param>
+        /// <param name="binding">The System.ServiceModel.Channels.Binding used to connect to the service by channels produced by the factory.</param>
+        /// <param name="endpointAddress">The System.ServiceModel.EndpointAddress that provides the location of the service.</param>
+        /// <returns>A channel of type T, the generic parameter for the factory, between the client and service.</returns>
+        public static T CreateChannel(C callbackObject, Binding binding, EndpointAddress endpointAddress)
+        {
+            return DuplexChannelFactory<T>.CreateChannel(callbackObject, binding, endpointAddress);
+        }
+
+        /// <summary>
+        /// Creates a duplex channel between a service and a callback instance on the client.
+        /// </summary>
+        /// <param name="callbackObject">The System.Object that the client uses to listen for messages from the connected service.</param>
+        /// <param name="binding">The System.ServiceModel.Channels.Binding used to connect to the service by channels produced by the factory.</param>
+        /// <param name="endpointAddress">The System.ServiceModel.EndpointAddress that provides the location of the service.</param>
+        /// <param name="via">The System.Uri that contains the transport address to which the message is sent.</param>
+        /// <returns>A channel of type T, the generic parameter for the factory, between the client and service.</returns>
+        public static T CreateChannel(C callbackObject, Binding binding, EndpointAddress endpointAddress, Uri via)
+        {
+            return DuplexChannelFactory<T>.CreateChannel(callbackObject, binding, endpointAddress);
         }
     }
 }
