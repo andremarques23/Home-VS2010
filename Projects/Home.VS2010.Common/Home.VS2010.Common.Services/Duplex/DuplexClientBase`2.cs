@@ -24,7 +24,7 @@ namespace Home.VS2010.Common.Services.Duplex
         /// </summary>
         /// <param name="instanceContext">An System.ServiceModel.InstanceContext object that associates the callback object with the channel to the service.</param>
         protected DuplexClientBase(InstanceContext<C> instanceContext)
-            : base(instanceContext)
+            : base(instanceContext.Context)
         { 
         }
 
@@ -34,7 +34,7 @@ namespace Home.VS2010.Common.Services.Duplex
         /// <param name="instanceContext">An System.ServiceModel.InstanceContext object that associates the callback object with the channel to the service.</param>
         /// <param name="serviceEndpoint">The service endpoint.</param>
         protected DuplexClientBase(InstanceContext<C> instanceContext, ServiceEndpoint serviceEndpoint)
-            : base(instanceContext, serviceEndpoint)
+            : base(instanceContext.Context, serviceEndpoint)
         { 
         }
 
@@ -44,7 +44,7 @@ namespace Home.VS2010.Common.Services.Duplex
         /// <param name="instanceContext">An System.ServiceModel.InstanceContext object that associates the callback object with the channel to the service.</param>
         /// <param name="endpointConfigurationName">The name of the client endpoint information in the application configuration file.</param>
         protected DuplexClientBase(InstanceContext<C> instanceContext, string endpointConfigurationName)
-            : base(instanceContext, endpointConfigurationName)
+            : base(instanceContext.Context, endpointConfigurationName)
         { 
         }
 
@@ -55,7 +55,7 @@ namespace Home.VS2010.Common.Services.Duplex
         /// <param name="endpointConfigurationName">The name of the client endpoint information in the application configuration file.</param>
         /// <param name="endpointRemoteAddress">The address of the service endpoint to use.</param>
         protected DuplexClientBase(InstanceContext<C> instanceContext, string endpointConfigurationName, string endpointRemoteAddress)
-            : base(instanceContext, endpointConfigurationName, endpointRemoteAddress)
+            : base(instanceContext.Context, endpointConfigurationName, endpointRemoteAddress)
         {
         }
 
@@ -66,7 +66,7 @@ namespace Home.VS2010.Common.Services.Duplex
         /// <param name="endpointConfigurationName">The name of the client endpoint information in the application configuration file.</param>
         /// <param name="endpointRemoteAddress">The service endpoint address to use.</param>
         protected DuplexClientBase(InstanceContext<C> instanceContext, string endpointConfigurationName, EndpointAddress endpointRemoteAddress)
-            : base(instanceContext, endpointConfigurationName, endpointRemoteAddress)
+            : base(instanceContext.Context, endpointConfigurationName, endpointRemoteAddress)
         {
         }
 
@@ -77,7 +77,7 @@ namespace Home.VS2010.Common.Services.Duplex
         /// <param name="binding">The binding with which to call the service.</param>
         /// <param name="endpointRemoteAddress">The service endpoint address to use.</param>
         protected DuplexClientBase(InstanceContext<C> instanceContext, Binding binding, EndpointAddress endpointRemoteAddress)
-            : base(instanceContext, binding, endpointRemoteAddress)
+            : base(instanceContext.Context, binding, endpointRemoteAddress)
         {
         }
 
