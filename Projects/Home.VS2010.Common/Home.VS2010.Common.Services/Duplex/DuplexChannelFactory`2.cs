@@ -305,7 +305,7 @@ namespace Home.VS2010.Common.Services.Duplex
         /// <returns>A channel of type T, the generic parameter for the factory, between the client and service.</returns>
         public static T CreateChannel(C callbackObject, Binding binding, EndpointAddress endpointAddress, Uri via)
         {
-            return DuplexChannelFactory<T>.CreateChannel(callbackObject, binding, endpointAddress);
+            return DuplexChannelFactory<T>.CreateChannel(callbackObject, binding, endpointAddress, via);
         }
     }
 }
