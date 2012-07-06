@@ -11,6 +11,8 @@ namespace Home.VS2010.Common.Services.Hosting
     using System.Collections.Generic;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using Extensions;
     using Resources;
 
     /// <summary>
@@ -32,6 +34,11 @@ namespace Home.VS2010.Common.Services.Hosting
         /// A collection of types and service host/endpoint address pair values.
         /// </summary>
         private static Dictionary<Type, HostEndpointPair> serviceHosts = new Dictionary<Type, HostEndpointPair>();
+
+        /// <summary>
+        /// A collection of types and throttling configurations values.
+        /// </summary>
+        private static Dictionary<Type, ServiceThrottlingBehavior> serviceThrottlingBehaviors = new Dictionary<Type, ServiceThrottlingBehavior>();
 
         /// <summary>
         /// Initializes static members of the InProcServiceFactory class.
@@ -88,6 +95,44 @@ namespace Home.VS2010.Common.Services.Hosting
         }
 
         /// <summary>
+        /// Sets run-time throughput settings to the largest possible values of an System.Int32.
+        /// </summary>
+        /// <typeparam name="S">The service type.</typeparam>
+        public static void MaxOutThrottleSettings<S>()
+        {
+            SetThrottle<S>(int.MaxValue, int.MaxValue, int.MaxValue);
+        }
+
+        /// <summary>
+        /// Sets run-time throughput settings for service performance tunning.
+        /// </summary>
+        /// <typeparam name="S">The service type.</typeparam>
+        /// <param name="serviceThrottlingBehavior">System.ServiceModel.Description.ServiceThrottlingBehavior containing the settings.</param>
+        public static void SetThrottle<S>(ServiceThrottlingBehavior serviceThrottlingBehavior)
+        {
+            serviceThrottlingBehaviors[typeof(S)] = serviceThrottlingBehavior;
+        }
+
+        /// <summary>
+        /// Sets run-time throughput settings for service performance tunning.
+        /// </summary>
+        /// <typeparam name="S">The service type.</typeparam>
+        /// <param name="maxConcurrentCalls">The maximum number of messages actively processing across a System.ServiceModel.ServiceHost.</param>
+        /// <param name="maxConcurrentInstances">The maximum number of System.ServiceModel.InstanceContext objects in the service that can execute at one time.</param>
+        /// <param name="maxConcurrentSessions">The maximum number of sessions a System.ServiceModel.ServiceHost object can accept at one time.</param>
+        public static void SetThrottle<S>(int maxConcurrentCalls, int maxConcurrentInstances, int maxConcurrentSessions)
+        {
+            ServiceThrottlingBehavior serviceThrottlingBehavior = new ServiceThrottlingBehavior
+                                                                  {
+                                                                      MaxConcurrentCalls = maxConcurrentCalls,
+                                                                      MaxConcurrentInstances = maxConcurrentCalls,
+                                                                      MaxConcurrentSessions = maxConcurrentSessions
+                                                                  };
+
+            SetThrottle<S>(serviceThrottlingBehavior);
+        }
+
+        /// <summary>
         /// Gets a service host/endpoint address pair of a specified service contract type. If the collection of types
         /// and pairs does not already contain the service type, a service host instance is created for the type.
         /// </summary>
@@ -114,6 +159,11 @@ namespace Home.VS2010.Common.Services.Hosting
                 serviceHosts.Add(serviceType, hostAddressPair);
 
                 serviceHost.AddServiceEndpoint(typeof(I), Binding, endpointAddress.Uri);
+                if (serviceThrottlingBehaviors.ContainsKey(serviceType))
+                {
+                    serviceHost.SetThrottle(serviceThrottlingBehaviors[serviceType]);
+                }
+
                 serviceHost.Open();
             }
 
