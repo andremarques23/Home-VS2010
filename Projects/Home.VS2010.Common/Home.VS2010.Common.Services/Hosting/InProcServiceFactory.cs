@@ -98,7 +98,7 @@ namespace Home.VS2010.Common.Services.Hosting
         /// Sets run-time throughput settings to the largest possible values of an System.Int32.
         /// </summary>
         /// <typeparam name="S">The service type.</typeparam>
-        public static void MaxOutThrottleSettings<S>()
+        public static void MaxOutThrottle<S>()
         {
             SetThrottle<S>(int.MaxValue, int.MaxValue, int.MaxValue);
         }
