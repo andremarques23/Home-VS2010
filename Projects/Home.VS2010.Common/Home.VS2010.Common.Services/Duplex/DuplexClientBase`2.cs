@@ -10,6 +10,7 @@ namespace Home.VS2010.Common.Services.Duplex
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
+    using Home.VS2010.Common.Services.Validation;
 
     /// <summary>
     /// Used to create a channel to a duplex service and associate that channel with a callback object.
@@ -19,6 +20,14 @@ namespace Home.VS2010.Common.Services.Duplex
     public abstract class DuplexClientBase<T, C> : DuplexClientBase<T>
         where T : class
     {
+        /// <summary>
+        /// Initializes static members of the DuplexClientBase class.
+        /// </summary>
+        static DuplexClientBase()
+        {
+            ServiceValidations.ValidateCallbackContractForType<T, C>();
+        }
+
         /// <summary>
         /// Initializes a new instance of the DuplexClientBase class.
         /// </summary>

@@ -123,4 +123,19 @@
   <data name="InProcServiceBaseAddress" xml:space="preserve">
     <value>net.pipe://localhost/</value>
   </data>
+  <data name="OnlyWcfCommunicationRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ReliabilityNotSuportedOrDisabled" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TransactionFlowNotSupportedOrDisable" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TypeNotDefineCallbackContract" xml:space="preserve">
+    <value>The type {0} is not defined as a callback contract for type {1}.</value>
+  </data>
+  <data name="TypeNotDefineServiceContract" xml:space="preserve">
+    <value>The type {0} is not defined as a service contract.</value>
+  </data>
 </root>

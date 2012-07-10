@@ -11,6 +11,7 @@ namespace Home.VS2010.Common.Services.Duplex
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
+    using Home.VS2010.Common.Services.Validation;
 
     /// <summary>
     /// Provides the means to create and manage duplex channels of different types that are used by clients to send and receive messages to and from service endpoints.
@@ -20,6 +21,14 @@ namespace Home.VS2010.Common.Services.Duplex
     public class DuplexChannelFactory<T, C> : DuplexChannelFactory<T>
         where T : class
     {
+        /// <summary>
+        /// Initializes static members of the DuplexChannelFactory class.
+        /// </summary>
+        static DuplexChannelFactory()
+        {
+            ServiceValidations.ValidateCallbackContractForType<T, C>();
+        }
+
         /// <summary>
         /// Initializes a new instance of the DuplexChannelFactory class.
         /// </summary>

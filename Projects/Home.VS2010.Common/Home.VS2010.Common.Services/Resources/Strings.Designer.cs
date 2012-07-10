@@ -77,5 +77,50 @@ namespace Home.VS2010.Common.Services.Resources {
                 return ResourceManager.GetString("InProcServiceBaseAddress", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string OnlyWcfCommunicationRequired {
+            get {
+                return ResourceManager.GetString("OnlyWcfCommunicationRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ReliabilityNotSuportedOrDisabled {
+            get {
+                return ResourceManager.GetString("ReliabilityNotSuportedOrDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string TransactionFlowNotSupportedOrDisable {
+            get {
+                return ResourceManager.GetString("TransactionFlowNotSupportedOrDisable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The type {0} is not defined as a callback contract for type {1}..
+        /// </summary>
+        internal static string TypeNotDefineCallbackContract {
+            get {
+                return ResourceManager.GetString("TypeNotDefineCallbackContract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The type {0} is not defined as a service contract..
+        /// </summary>
+        internal static string TypeNotDefineServiceContract {
+            get {
+                return ResourceManager.GetString("TypeNotDefineServiceContract", resourceCulture);
+            }
+        }
     }
 }
