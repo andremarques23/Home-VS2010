@@ -16,6 +16,11 @@ namespace Home.VS2010.Common.Services.Validation
     /// </summary>
     public static class ServiceValidations
     {
+        /// <summary>
+        /// Validates if the given type implements a callback contract.
+        /// </summary>
+        /// <typeparam name="T">The service type to validate.</typeparam>
+        /// <typeparam name="C">The callback type to validate.</typeparam>
         public static void ValidateCallbackContractForType<T, C>()
             where T : class
         {
@@ -35,6 +40,10 @@ namespace Home.VS2010.Common.Services.Validation
             }
         }
 
+        /// <summary>
+        /// Validates if the given type implements service contract.
+        /// </summary>
+        /// <typeparam name="T">The service type to validate.</typeparam>
         public static void ValidateServiceContractForType<T>()
         {
             Type contractType = typeof(T);

@@ -44,6 +44,8 @@
     <Compile Include="Duplex\DuplexChannelFactory`2.cs" />
     <Compile Include="Duplex\DuplexClientBase`2.cs" />
     <Compile Include="Duplex\InstanceContext`1.cs" />
+    <Compile Include="Extensions\ServiceDescriptionExtensions.cs" />
+    <Compile Include="Extensions\ServiceHostBaseExtensions.cs" />
     <Compile Include="Extensions\ServiceHostExtensions.cs" />
     <Compile Include="Hosting\InProcServiceFactory.cs" />
     <Compile Include="Hosting\CommunicationWrapper`2.cs" />
