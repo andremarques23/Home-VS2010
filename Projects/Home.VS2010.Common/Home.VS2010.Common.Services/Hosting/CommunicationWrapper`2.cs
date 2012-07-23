@@ -28,6 +28,16 @@ namespace Home.VS2010.Common.Services.Hosting
         }
 
         /// <summary>
+        /// Initializes a new instance of the CommunicationWrapper class.
+        /// </summary>
+        /// <param name="singletonInstance">The instance of the type of the implemented service contract.</param>
+        protected CommunicationWrapper(S singletonInstance)
+        {
+            InProcServiceFactory.SetSingleton(singletonInstance);
+            this.Proxy = InProcServiceFactory.CreateChannel<I, S>();
+        }
+
+        /// <summary>
         /// Occurs when the communication object completes its transition from the closing state into the closed state.
         /// </summary>
         event EventHandler ICommunicationObject.Closed

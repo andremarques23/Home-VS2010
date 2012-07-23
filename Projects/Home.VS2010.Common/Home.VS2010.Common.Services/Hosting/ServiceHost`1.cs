@@ -29,12 +29,30 @@ namespace Home.VS2010.Common.Services.Hosting
         }
 
         /// <summary>
-        /// Initializes a new instance of the ServiceHost class with 
-        /// the type of service and its base addresses specified.
+        /// Initializes a new instance of the ServiceHost class with the type of service and its base addresses specified.
         /// </summary>
         /// <param name="baseAddresses">An array of type System.Uri that contains the base addresses for the hosted service.</param>
         public ServiceHost(params Uri[] baseAddresses)
             : base(typeof(T), baseAddresses)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the ServiceHost class with the instance of the service specified.
+        /// </summary>
+        /// <param name="singletonInstance">The instance of the hosted service.</param>
+        public ServiceHost(T singletonInstance)
+            : base(singletonInstance)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the ServiceHost class with the instance of the service and its base addresses specified.
+        /// </summary>
+        /// <param name="singletonInstance">The instance of the hosted service.</param>
+        /// <param name="baseAddresses">An array of type System.Uri that contains the base addresses for the hosted service.</param>
+        public ServiceHost(T singletonInstance, params Uri[] baseAddresses)
+            : base(singletonInstance, baseAddresses)
         {
         }
 

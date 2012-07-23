@@ -40,7 +40,12 @@ namespace Home.VS2010.Common.Services.Hosting
         /// <summary>
         /// A collection of types and throttling configurations values.
         /// </summary>
-        private static Dictionary<Type, ServiceThrottlingBehavior> serviceThrottlingBehaviors = new Dictionary<Type, ServiceThrottlingBehavior>();
+        private static Dictionary<Type, ServiceThrottlingBehavior> serviceThrottles = new Dictionary<Type, ServiceThrottlingBehavior>();
+
+        /// <summary>
+        /// A collection of types and object instances values.
+        /// </summary>
+        private static Dictionary<Type, object> serviceSingletonInstances = new Dictionary<Type, object>();
 
         /// <summary>
         /// Initializes static members of the InProcServiceFactory class.
@@ -144,6 +149,16 @@ namespace Home.VS2010.Common.Services.Hosting
         }
 
         /// <summary>
+        /// Sets a singleton service instance to be hosted by the service host.
+        /// </summary>
+        /// <typeparam name="S">The service type.</typeparam>
+        /// <param name="singletonInstance">The service instance.</param>
+        public static void SetSingleton<S>(S singletonInstance)
+        {
+            serviceSingletonInstances[typeof(S)] = singletonInstance;
+        }
+
+        /// <summary>
         /// Sets run-time throughput settings for service performance tunning. 
         /// This method should only be called before a service instance is created.
         /// </summary>
@@ -152,7 +167,7 @@ namespace Home.VS2010.Common.Services.Hosting
         [MethodImpl(MethodImplOptions.Synchronized)]
         public static void SetThrottle<S>(ServiceThrottlingBehavior serviceThrottlingBehavior)
         {
-            serviceThrottlingBehaviors[typeof(S)] = serviceThrottlingBehavior;
+            serviceThrottles[typeof(S)] = serviceThrottlingBehavior;
         }
 
         /// <summary>
@@ -195,16 +210,26 @@ namespace Home.VS2010.Common.Services.Hosting
             }
             else
             {
-                ServiceHost<S> serviceHost = new ServiceHost<S>(new Uri(BaseAddress));
+                ServiceHost<S> serviceHost = null;
                 EndpointAddress endpointAddress = new EndpointAddress(BaseAddress + Guid.NewGuid());
+
+                if (serviceSingletonInstances.ContainsKey(typeof(S)))
+                {
+                    S singletonInstance = serviceSingletonInstances[typeof(S)] as S;
+                    serviceHost = new ServiceHost<S>(singletonInstance);
+                }
+                else
+                {
+                    serviceHost = new ServiceHost<S>();
+                }
 
                 hostAddressPair = new HostEndpointPair(serviceHost, endpointAddress);
                 serviceHosts.Add(serviceType, hostAddressPair);
-
                 serviceHost.AddServiceEndpoint(typeof(I), Binding, endpointAddress.Uri);
-                if (serviceThrottlingBehaviors.ContainsKey(serviceType))
+
+                if (serviceThrottles.ContainsKey(serviceType))
                 {
-                    serviceHost.SetThrottle(serviceThrottlingBehaviors[serviceType]);
+                    serviceHost.SetThrottle(serviceThrottles[serviceType]);
                 }
 
                 serviceHost.Open();
