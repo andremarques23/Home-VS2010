@@ -17,7 +17,7 @@ namespace Home.VS2010.Common.Services.Hosting
     /// <summary>
     /// Provides a host for services.
     /// </summary>
-    /// <typeparam name="T">The type of hosted service.</typeparam>
+    /// <typeparam name="T">The type of the hosted service.</typeparam>
     public class ServiceHost<T> : ServiceHost
     {
         /// <summary>
@@ -68,9 +68,10 @@ namespace Home.VS2010.Common.Services.Hosting
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether general unhandled execution exceptions are to be converted into and sent as a fault message.
-        /// Set this to true only during development to troubleshoot a service.     
+        /// Gets or sets a value indicating whether general unhandled execution exceptions are to be converted and sent as a fault message. 
+        /// Set this to true only during development to troubleshoot a service.
         /// </summary>
+        /// <remarks>Should be called before the host has been opened.</remarks>
         public bool IncludeExceptionDetailInFaults
         {
             get
@@ -92,9 +93,49 @@ namespace Home.VS2010.Common.Services.Hosting
         }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to audit authentication and authorization security events at service level. 
+        /// </summary>
+        /// <remarks>Should be called before the host has been opened.</remarks>
+        public bool ServiceSecurityAuditEnabled
+        {
+            get 
+            {
+                ServiceSecurityAuditBehavior serviceSecurityAuditBehavior = this.Description.Behaviors.Find<ServiceSecurityAuditBehavior>();
+                if (serviceSecurityAuditBehavior != null)
+                {
+                    return serviceSecurityAuditBehavior.MessageAuthenticationAuditLevel == AuditLevel.SuccessOrFailure && 
+                           serviceSecurityAuditBehavior.ServiceAuthorizationAuditLevel == AuditLevel.SuccessOrFailure;
+                }
+
+                return false;
+            }
+
+            set
+            {
+                if (this.State == CommunicationState.Opened)
+                {
+                    throw new InvalidOperationException(Strings.HostAlreadyOpened);
+                }
+
+                ServiceSecurityAuditBehavior serviceSecurityAuditBehavior = this.Description.Behaviors.Find<ServiceSecurityAuditBehavior>();
+                if (serviceSecurityAuditBehavior == null && value == true)
+                {
+                    serviceSecurityAuditBehavior = new ServiceSecurityAuditBehavior
+                                            {
+                                                MessageAuthenticationAuditLevel = AuditLevel.SuccessOrFailure,
+                                                ServiceAuthorizationAuditLevel = AuditLevel.SuccessOrFailure
+                                            };
+
+                    this.Description.Behaviors.Add(serviceSecurityAuditBehavior);
+                }
+            }
+        }
+
+        /// <summary>
         /// Enables the publication of service metadata and associated information.
         /// </summary>
         /// <param name="getEnabled">Indicates whether to publish service metadata for retrieval using an GET request.</param>
+        /// <remarks>Should be called before the host has been opened.</remarks>
         public void EnableMetadataExchange(bool getEnabled = true)
         {
             if (this.State == CommunicationState.Opened)
