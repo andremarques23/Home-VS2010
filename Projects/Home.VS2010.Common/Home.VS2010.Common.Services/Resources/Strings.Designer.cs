@@ -115,6 +115,15 @@ namespace Home.VS2010.Common.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The type {0} is not defined as a data contract..
+        /// </summary>
+        internal static string TypeNotDefineDataContract {
+            get {
+                return ResourceManager.GetString("TypeNotDefineDataContract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The type {0} is not defined as a service contract..
         /// </summary>
         internal static string TypeNotDefineServiceContract {
