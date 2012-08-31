@@ -8,7 +8,6 @@ namespace Home.VS2010.Common.Services.Validation
 {
     using System;
     using System.Linq;
-    using System.Runtime.Serialization;
     using System.ServiceModel;
     using Resources;
 
@@ -42,7 +41,7 @@ namespace Home.VS2010.Common.Services.Validation
         }
 
         /// <summary>
-        /// Validates if the given type implements a service contract.
+        /// Validates if the given type implements service contract.
         /// </summary>
         /// <typeparam name="T">The service type to validate.</typeparam>
         public static void ValidateServiceContractForType<T>()
@@ -53,21 +52,6 @@ namespace Home.VS2010.Common.Services.Validation
             if (customAttributes.Length == 0)
             {
                 throw new InvalidOperationException(string.Format(Strings.TypeNotDefineServiceContract, contractType.Name));
-            }
-        }
-
-        /// <summary>
-        /// Validates if the given type implements a data contract.
-        /// </summary>
-        /// <typeparam name="T">The data type to validate.</typeparam>
-        public static void ValidateDataContractForType<T>()
-        {
-            Type dataContract = typeof(T);
-
-            object[] customAttributes = dataContract.GetCustomAttributes(typeof(DataContractAttribute), false);
-            if (customAttributes.Length == 0)
-            {
-                throw new InvalidOperationException(string.Format(Strings.TypeNotDefineDataContract, dataContract.Name));
             }
         }
     }

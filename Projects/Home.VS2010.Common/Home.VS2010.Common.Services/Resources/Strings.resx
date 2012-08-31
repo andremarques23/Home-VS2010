@@ -135,6 +135,9 @@
   <data name="TypeNotDefineCallbackContract" xml:space="preserve">
     <value>The type {0} is not defined as a callback contract for type {1}.</value>
   </data>
+  <data name="TypeNotDefineDataContract" xml:space="preserve">
+    <value>The type {0} is not defined as a data contract.</value>
+  </data>
   <data name="TypeNotDefineServiceContract" xml:space="preserve">
     <value>The type {0} is not defined as a service contract.</value>
   </data>
